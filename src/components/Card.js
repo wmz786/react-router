@@ -3,11 +3,10 @@ import { useParams } from "react-router-dom";
 
 const Card = () => {
   const [userName, setUser] = useState("");
-  let { user } = useParams();
+  const { user } = useParams();
   useEffect(() => {
     setUser(user);
-    console.log("was");
-  });
+  }, [user]);
 
   return (
     <div
