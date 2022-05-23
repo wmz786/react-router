@@ -1,23 +1,29 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import Modal from "./Modal";
-import { connect } from "react-redux";
+import { connect, useSelector } from "react-redux";
 
-const Contact = ({ cards }) => {
+const Contact = () => {
+  const { card } = useSelector((state) => {
+    return {
+      card: state.cards,
+    };
+  });
+
   return (
     <div>
       {/* <Modal /> */}
-      {cards.map((card) => {
+      {card.map(({ id, title, desc }) => {
         return (
           <div
             className="ui raised very padded text container segment"
             style={{ marginTop: "80px" }}
-            key={card.id}
+            key={id}
           >
-            <Link to={`/${card.title}`} className="ui header">
-              {card.title}
+            <Link to={`/${title}`} className="ui header">
+              {title}
             </Link>
-            <p>{card.desc}</p>
+            <p>{desc}</p>
           </div>
         );
       })}
@@ -43,10 +49,12 @@ const Contact = ({ cards }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    cards: state.card,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     cards: state.card,
+//   };
+// };
 
-export default connect(mapStateToProps)(Contact);
+// export default connect(mapStateToProps)(Contact);
+
+export default Contact;
