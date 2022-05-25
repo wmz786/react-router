@@ -16,6 +16,7 @@ const initialState = {
       desc: "This course introduces the basic concepts of Software Project Management. Students will study the software project planning, cost estimation and scheduling, project management tools, factors influencing productivity and success.",
     },
   ],
+  users: [],
 };
 
 const rootReducer = (state = initialState, action) => {
@@ -28,7 +29,11 @@ const rootReducer = (state = initialState, action) => {
         ...state,
         cards: newCard,
       };
-
+    case "FETCH_USERS":
+      return {
+        ...state,
+        users: action.payload,
+      };
     default:
       return state;
   }
