@@ -1,10 +1,9 @@
 import React from "react";
-// import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
+import { deleteCard } from "../actions/cardAction";
+import { useDispatch, useSelector } from "react-redux";
 
-const Card = (props) => {
-  // const [userName, setUser] = useState("");
+const Card = () => {
   const { user } = useParams();
   const { card } = useSelector((state) => {
     return {
@@ -12,23 +11,14 @@ const Card = (props) => {
     };
   });
 
-  const { deleteCard } = useDispatch((dispatch) => {
-    return {
-      deleteCard: (id) => {
-        dispatch({ type: "DELETE_CARD", id });
-      },
-    };
-  });
-  console.log(props);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  function onButtonClick() {
+    let id = card.id;
+    dispatch(deleteCard(id));
+    navigate("/contact");
+  }
   const { title, desc } = card;
-  // function onButtonClick() {
-  //   let id = card.id;
-  //   deleteCard(id);
-  // }
-
-  // useEffect(() => {
-  //   setUser(user);
-  // }, [user]);
 
   return (
     <div
@@ -39,20 +29,13 @@ const Card = (props) => {
       <p>{desc}</p>
       <button
         className="ui primary right floated button"
-        // onClick={onButtonClick}
+        onClick={onButtonClick}
       >
         Delete
       </button>
     </div>
   );
-};;
+};
 
-// const mapStateToProps = (state) => {
-//   return {
-//     card: state.card.find((card) => card.title == user),
-//   };
-// };
-
-// export default connect(mapStateToProps)(Card);
 
 export default Card;
