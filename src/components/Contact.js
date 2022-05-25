@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 // import Modal from "./Modal";
-import { connect, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 
 const Contact = () => {
   const { card } = useSelector((state) => {
